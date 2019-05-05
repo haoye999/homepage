@@ -28,9 +28,10 @@ export default {
      */
     getbgImg() {
       bgImg({
-        category: 'backgrounds'
+        q: 'sky'
       }).then(data => {
         this.bgImgs = data.hits;
+        this.curBgImg = this.bgImgs[imgIndex];
       });
     },
     /**

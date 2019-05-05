@@ -5,10 +5,10 @@
         <a class="swiper-slide" href="https://music.godhaoye.com">
           HY MUSIC
         </a>
-        <a class="swiper-slide">
+        <a class="swiper-slide" href="https://haoye999.github.io">
           HY BLOG
         </a>
-        <a class="swiper-slide">
+        <a class="swiper-slide" href="https://github.com/haoye999">
           GITHUB
         </a>
       </div>
@@ -90,14 +90,12 @@ export default {
       overflow: hidden;
       cursor: pointer;
       background: center / cover rgba(30, 90, 150, .5);
+      color: black;
       @media screen and (max-width: 450px) {
         width: 80vw;
         height: 50vw;
         font-size: .5em;
       }
-    }
-    .current-pagination {
-      background: green;
     }
   }
 }
