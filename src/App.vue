@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Bg from 'components/bg.vue';
-import Navg from 'components/navg.vue';
-import Projects from 'components/projects.vue';
+import Bg from 'components/bg/bg.vue';
+import Navg from 'components/navg/navg.vue';
+import Projects from 'components/projects/projects.vue';
 
 export default {
   components: {
