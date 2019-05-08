@@ -2,14 +2,9 @@
   <div class="projects">
     <div class="swiper-container">
       <div class="swiper-wrapper" ref="wrapper">
-        <a class="swiper-slide" href="https://music.godhaoye.com">
-          HY MUSIC
-        </a>
-        <a class="swiper-slide" href="https://haoye999.github.io">
-          HY BLOG
-        </a>
-        <a class="swiper-slide" href="https://github.com/haoye999">
-          GITHUB
+        <a class="swiper-slide" v-for="project in projects" :key="project.title" :href="project.href">
+          <div class="swiper-slide-bg" :style="`background-image: url(${project.bg})`"></div>
+          <h3 class="swiper-slide-title">{{ project.title }}</h3>
         </a>
       </div>
       <!-- Add Pagination -->
@@ -23,9 +18,30 @@ import Swiper from 'swiper';
 import { getRandom } from 'assets/js/utils';
 
 export default {
+  data() {
+    return {
+      projects: [
+        {
+          title: 'HY MUSIC',
+          href: 'https://music.godhaoye.com',
+          bg: './piano_640.jpg'
+        },
+        {
+          title: 'HY BLOG',
+          href: 'https://haoye999.github.io',
+          bg: './beverage_640.jpg'
+        },
+        {
+          title: 'GITHUB',
+          href: 'https://github.com/haoye999',
+          bg: './programmer_640.png'
+        }
+      ]
+    }
+  },
   mounted() {
     this.initSwiper();
-    this.initBackgroundColor();
+    // this.initBackgroundColor();
   },
   methods: {
     /**
@@ -89,12 +105,38 @@ export default {
       border-radius: 1em;
       overflow: hidden;
       cursor: pointer;
-      background: center / cover rgba(30, 90, 150, .5);
+      background: center / cover;
       color: black;
       @media screen and (max-width: 450px) {
         width: 80vw;
         height: 50vw;
         font-size: .5em;
+      }
+      .swiper-slide-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        transition: all .5s;
+      }
+      .swiper-slide-title {
+        z-index: 1;
+        opacity: 0;
+        color: black;
+        transform: translate(0, -500px) scale(.8);
+        transition: all .5s;
+      }
+      &:hover {
+        .swiper-slide-bg {
+          filter: blur(2px);
+          transform: scale(1.1);
+          opacity: .8;
+        }
+        .swiper-slide-title {
+          opacity: 1;
+          transform: translate(0, 0) scale(1);
+        }
       }
     }
   }

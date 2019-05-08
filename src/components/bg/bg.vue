@@ -14,7 +14,7 @@ export default {
       interval: 30000,
       imgIndex: 0,
       curBgImg:
-        'https://pixabay.com/get/ed35b80b29f0093ed1584d05fb1d4794e07fe3dd11b60c4090f5c679a4eab7bdd9_1280.jpg',
+        './fantasy_1920.jpg',
       transitionDuration: 3000
     };
   },
@@ -31,7 +31,8 @@ export default {
         q: 'sky'
       }).then(data => {
         this.bgImgs = data.hits;
-        this.curBgImg = this.bgImgs[imgIndex];
+        // 初始化第一个
+        // this.curBgImg = this.bgImgs[this.imgIndex].largeImageURL;
       });
     },
     /**
@@ -83,8 +84,7 @@ export default {
   .bg {
     height: 100%;
     width: 100%;
-    background: center / cover no-repeat
-      url(https://pixabay.com/get/ea35b60821f6093ed1584d05fb1d4794e07fe3dd11b60c4090f5c771aee4b1bbda_1280.jpg);
+    background: center / cover no-repeat;
     filter: blur(5px);
     transform: scale(1.2);
     opacity: 0.9;
