@@ -119,6 +119,7 @@ export default {
         bottom: 0;
         right: 0;
         transition: all .5s;
+        background: center / cover no-repeat;
       }
       .swiper-slide-title {
         z-index: 1;
