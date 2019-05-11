@@ -28,7 +28,7 @@ export default {
 @import 'assets/style/base.less';
 
 .bg-container {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   z-index: -1;

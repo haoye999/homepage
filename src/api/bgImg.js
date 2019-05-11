@@ -2,6 +2,7 @@
 import axios from 'axios';
 import config from './config';
 
+// 获取 pixabay 图片库接口
 export function bgImg(moreParams) {
   const options = {
     url: 'https://pixabay.com/api/',

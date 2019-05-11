@@ -1,14 +1,12 @@
 <template>
   <nav class="nav">
-    <img class="nav-logo" src="./logo.png" alt="" srcset="">
+    <img class="nav-logo" src="./logo.png" alt="" srcset="" />
     <span class="nav-title">HAOYE HOME</span>
   </nav>
 </template>
 
 <script>
-export default {
-
-};
+export default {};
 </script>
 
 <style lang="less" scoped>
@@ -23,7 +21,7 @@ export default {
     width: 1.5em;
   }
   .nav-title {
-    padding-left: .5em;
+    padding-left: 0.5em;
   }
 }
 </style>

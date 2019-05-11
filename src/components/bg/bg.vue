@@ -1,11 +1,12 @@
 <template>
-  <div class="bg-container">
-    <div class="bg" ref="bg" :style="`background-image: url(${curBgImg})`"></div>
+  <div class="bg-wrapper">
+    <div class="bg" ref="bg" :style="`background-color: ${bgColor}`"></div>
   </div>
 </template>
 
 <script>
-import { bgImg } from 'api/bgImg';
+import { getRandom } from 'assets/js/utils';
+import { setInterval } from 'timers';
 
 export default {
   data() {
@@ -13,84 +14,70 @@ export default {
       bgImgs: [],
       interval: 30000,
       imgIndex: 0,
-      curBgImg:
-        './fantasy_1920.jpg',
-      transitionDuration: 3000
+      transitionDuration: 3000,
+      bgColor: ''
     };
   },
   created() {
-    this.getbgImg();
-    this.setImageCycle();
+    this.autoChangeBg();
   },
   methods: {
     /**
-     * 获取 pixabay 图片
+     * 获取随机背景渐变色
      */
-    getbgImg() {
-      bgImg({
-        q: 'sky'
-      }).then(data => {
-        this.bgImgs = data.hits;
-        // 初始化第一个
-        // this.curBgImg = this.bgImgs[this.imgIndex].largeImageURL;
+    getRandomLinearGradient(min = 3, max = 5) {
+      let num = getRandom(min, max);
+      let result = '';
+
+      while (num--) {
+        result += `linear-gradient(${getRandom(
+          0,
+          360
+        )}deg, ${this.getRandomRGBA()}, ${this.getRandomRGBA()})`;
+        if (num !== 0) {
+          result += ', ';
+        }
+      }
+
+      return result;
+    },
+    /**
+     * 获取随机颜色值
+     */
+    getRandomRGBA() {
+      return `rgb(${getRandom(0, 255)}, ${getRandom(0, 255)}, ${getRandom(
+        0,
+        255
+      )})`;
+    },
+    autoChangeBg() {
+      this.$nextTick(() => {
+        this.bgColor = this.getRandomRGBA();
       });
-    },
-    /**
-     * 图片循环
-     */
-    setImageCycle() {
-      clearInterval(this.timer);
-      this.timer = setInterval(this.changeImageCycleHandle, this.interval);
-    },
-    changeImageCycleHandle() {
-      this.imgIndex = (this.imgIndex + 1) % this.bgImgs.length;
-    },
-    /**
-     * 设置背景图片 (with animation)
-     */
-    setBgImg(url) {
-      this.$refs.bg.style.transition = `all ${this.transitionDuration / 2}ms`;
-      this.$refs.bg.classList.add('enter');
-      setTimeout(() => {
-        this.curBgImg = url;
-        this.$refs.bg.classList.remove('enter');
-        setTimeout(() => {
-          this.$refs.bg.style.transition = '';
-        }, this.transitionDuration / 2);
-      }, this.transitionDuration / 2);
-    }
-  },
-  watch: {
-    /**
-     * index 改变，则改变相应的背景图片
-     */
-    imgIndex() {
-      const image = new Image();
-      const url = this.bgImgs[this.imgIndex].largeImageURL;
-      image.onload = () => {
-        this.setBgImg(url);
-      };
-      image.src = url;
+      setInterval(() => {
+        this.bgColor = this.getRandomRGBA();
+      }, 5000);
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-.bg-container {
+.bg-wrapper {
   height: 100%;
   width: 100%;
   overflow: hidden;
   .bg {
     height: 100%;
     width: 100%;
-    background: center / cover no-repeat;
-    filter: blur(5px);
-    transform: scale(1.2);
-    opacity: 0.9;
-    &.enter {
-      transform: scale(1.1);
-    }
+    background: linear-gradient(
+        217deg,
+        rgba(255, 0, 0, 0.3),
+        rgba(255, 0, 0, 0) 70.71%
+      ),
+      linear-gradient(127deg, rgba(0, 255, 0, 0.5), rgba(0, 255, 0, 0) 70.71%),
+      linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+    transition: all 5s;
   }
 }
 </style>

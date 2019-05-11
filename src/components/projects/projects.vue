@@ -2,8 +2,16 @@
   <div class="projects">
     <div class="swiper-container">
       <div class="swiper-wrapper" ref="wrapper">
-        <a class="swiper-slide" v-for="project in projects" :key="project.title" :href="project.href">
-          <div class="swiper-slide-bg" :style="`background-image: url(${project.bg})`"></div>
+        <a
+          class="swiper-slide"
+          v-for="project in projects"
+          :key="project.title"
+          :href="project.href"
+        >
+          <div
+            class="swiper-slide-bg"
+            :style="`background-image: url(${project.bg})`"
+          ></div>
           <h3 class="swiper-slide-title">{{ project.title }}</h3>
         </a>
       </div>
@@ -37,11 +45,11 @@ export default {
           bg: './programmer_640.png'
         }
       ]
-    }
+    };
   },
   mounted() {
     this.initSwiper();
-    // this.initBackgroundColor();
+    this.initBackgroundColor();
   },
   methods: {
     /**
@@ -73,13 +81,13 @@ export default {
     initBackgroundColor() {
       [...this.$refs.wrapper.children].forEach(item => {
         const child = item;
-        child.style.backgroundColor = this.getRandomColor();
+        child.style.backgroundColor = this.getRandomRGBA();
       });
     },
     /**
      * 获取随机颜色值
      */
-    getRandomColor() {
+    getRandomRGBA() {
       return `rgba(${getRandom(0, 255)}, ${getRandom(0, 255)}, ${getRandom(0, 255)}, ${Math.random() / 2 + 0.3})`;
     }
   }
@@ -110,7 +118,7 @@ export default {
       @media screen and (max-width: 450px) {
         width: 80vw;
         height: 50vw;
-        font-size: .5em;
+        font-size: 0.5em;
       }
       .swiper-slide-bg {
         position: absolute;
@@ -118,21 +126,20 @@ export default {
         left: 0;
         bottom: 0;
         right: 0;
-        transition: all .5s;
+        transition: transform 0.5s, opacity 0.5s;
         background: center / cover no-repeat;
       }
       .swiper-slide-title {
         z-index: 1;
         opacity: 0;
         color: black;
-        transform: translate(0, -500px) scale(.8);
-        transition: all .5s;
+        transform: translate(0, -500px) scale(0.8);
+        transition: all 0.5s;
       }
       &:hover {
         .swiper-slide-bg {
           filter: blur(2px);
           transform: scale(1.1);
-          opacity: .8;
         }
         .swiper-slide-title {
           opacity: 1;
