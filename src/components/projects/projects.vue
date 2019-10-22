@@ -36,7 +36,7 @@ export default {
         },
         {
           title: 'HY BLOG',
-          href: 'https://haoye999.github.io',
+          href: 'https://blog.godhaoye.com',
           bg: './beverage_640.jpg'
         },
         {
